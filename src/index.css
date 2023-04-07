@@ -1,0 +1,24 @@
+body {
+  background-color: rgb(255, 150, 134);
+}
+
+h1 {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
+
+@media only screen and (max-width:500px) {
+  .w-50 {
+    width: 90%;
+  }
+}
