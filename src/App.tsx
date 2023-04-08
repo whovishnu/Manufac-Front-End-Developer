@@ -1,7 +1,7 @@
 import './index.css';
 import { useEffect, useState } from "react";
 import ReactEcharts from "echarts-for-react";
-import { optionType } from "./types";
+import { optionType, wineDataType, tempObjType, tempValue } from "./types";
 
 // read wine data json
 const wineData = require('./Wine-Data.json')
@@ -37,15 +37,15 @@ function App() {
   useEffect(() => {
     let colorIntensity: Number[][] = [];
 
-    let tempObj: any = {}
+    let tempObj: tempObjType = {}
 
-    wineData.forEach((element: any) => {
+    wineData.forEach((element: wineDataType) => {
       colorIntensity.push([element["Color intensity"], element["Hue"]]);
 
-      if (tempObj[element.Alcohol]) {
-        tempObj[element.Alcohol] = {
-          count: tempObj[element.Alcohol].count + 1,
-          sum: tempObj[element.Alcohol].sum + element["Malic Acid"]
+      if (tempObj[element.Alcohol.toString()]) {
+        tempObj[element.Alcohol.toString()] = {
+          count: tempObj[element.Alcohol.toString()].count + 1,
+          sum: tempObj[element.Alcohol.toString()].sum + element["Malic Acid"]
         }
       } else {
         tempObj[element.Alcohol] = {
@@ -57,7 +57,7 @@ function App() {
 
     let alcohol: string[] = Object.keys(tempObj);
 
-    let values: any[] = Object.values(tempObj);
+    let values: tempValue[] = Object.values(tempObj);
     let avgArray: Number[] = values.map(item => item.sum / item.count)
 
     setChartOption({
